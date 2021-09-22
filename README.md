@@ -107,3 +107,14 @@ if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token
 - Rendre l'entity unique par rapport à un champ : `@UniqueEntity("title")`
 - Utilisation des Regex : `@Assert\Regex("/^[0-9]{5}/")`
 - Pour créer un validator perosnnalisé, il faut créer une [contrainte](https://symfony.com/doc/current/reference/constraints.html) ensuite le validator correspondant
+
+
+## 6/16 : Security
+
+- La config se trouve dans le fichier `config/packages/security.yaml` : 
+    * `providers` pour la récupération des utilsateurs ( `in_memory` pour des utilsateurs ajouté au sein du même fichier, `from_database` pour des utilsateurs sauvegardés en bdd)
+    * `firewalls` pour les composants qui permettent d'authentifer les utilisateurs ( `http_basic` pour basic auth, `form login` , etc )
+    * `acces_control` pour définir les niveau d'accès des routes en fonctions des rôles
+    * `encoders` pour les encoders à utiliser pour chiffrer les mdp
+- Pour se déconnecter ( dans le cadre d'une basic auth ), il faut taper `log:out` devant l'url
+- La classe `User` pour la gestion des utilsateurs doit implémenter `UserInterface` du composant sécurity ( et `Serializable`
