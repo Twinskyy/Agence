@@ -109,7 +109,7 @@ if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token
 - Pour créer un validator perosnnalisé, il faut créer une [contrainte](https://symfony.com/doc/current/reference/constraints.html) ensuite le validator correspondant
 
 
-## 6/16 : Security
+## 6/16 : Securité & Authentification
 
 - La config se trouve dans le fichier `config/packages/security.yaml` : 
     * `providers` pour la récupération des utilsateurs ( `in_memory` pour des utilsateurs ajouté au sein du même fichier, `from_database` pour des utilsateurs sauvegardés en bdd)
@@ -117,4 +117,11 @@ if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token
     * `acces_control` pour définir les niveau d'accès des routes en fonctions des rôles
     * `encoders` pour les encoders à utiliser pour chiffrer les mdp
 - Pour se déconnecter ( dans le cadre d'une basic auth ), il faut taper `log:out` devant l'url
-- La classe `User` pour la gestion des utilsateurs doit implémenter `UserInterface` du composant sécurity ( et `Serializable`
+- La classe `User` pour la gestion des utilsateurs doit implémenter `UserInterface` du composant sécurity ( et `Serializable` )
+-  Pour obtenir les erreurs d'authentification, on peut injecter `AuthenticationUtils`:  `getLastUsername` pour obtenir le dernier utilisateur injecté, `getLastAuthenticationError` pour la dernière erreur
+- Pour débugger la configuration d'un composant `php bin/console config:dump reference nomDuComposant`
+- Modifier le path pour s'authentifier ( par défaut c'est `/login_check` ) : `firewalls.form_login.check_path : login` pour le path `/login`
+- `php bin/console make:fixture` pour créer des fausses données (fixtures)
+- Utiliser la méthode `encodePassword()` de l'interface `UserPasswordEncoderInterface` pour encoder les mots de passe ( le 1er paramètre de la méthode, donc le user, doit implémenter la UserInterface)
+- `php bin/console doctrine:fixtures:load --append` charger les fixtures en BDD sans effacer les données qui y sont déjà
+- pour savoir si il y a un utilisateur connecté à l'application `{% if app.user %}`
