@@ -125,3 +125,14 @@ if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token
 - Utiliser la méthode `encodePassword()` de l'interface `UserPasswordEncoderInterface` pour encoder les mots de passe ( le 1er paramètre de la méthode, donc le user, doit implémenter la UserInterface)
 - `php bin/console doctrine:fixtures:load --append` charger les fixtures en BDD sans effacer les données qui y sont déjà
 - pour savoir si il y a un utilisateur connecté à l'application `{% if app.user %}`
+
+## 7/16 : Listing et pagination
+- Pour générer des *fake* données : utilisation de la lib faker `composer require fzaninotto/faker`
+- Pour paginer la liste des biens : utlisation du *bundle* paginator `composer require knplabs/knp-paginator-bundle` -> l'ajouter à la liste des bundles disponible dans `bundles.php` + création d'un fichier de configuration `config/packages/knp_paginator.yaml`
+- Pour editer le template de pagination, il faut modifier la clé `template.pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig' `
+- Pour modifier le texte des boutons *Suivant* et *Précédent*, c'est géré au niveau des traductions `translations/KnpPaginatorBundle.fr.yml`:
+```yml
+label_next: Suivant
+label_previous: Précédent
+```
+- Pour **vider le cache** `php bin/console cache:clear`
