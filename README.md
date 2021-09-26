@@ -136,3 +136,28 @@ label_next: Suivant
 label_previous: Précédent
 ```
 - Pour **vider le cache** `php bin/console cache:clear`
+
+## 8/16 : Filtrer les données
+- Principe :
+   1. Créer une Entity qui représente la recherche
+   1. Créer un formulaire
+   1. Géréer le traitement (la recherche) dans le controller
+- **Fluent** setter retourne l'objet et permet donc de chainer les modifications sur un objet
+```php
+public function setIndex($index)
+{
+   $this->index = $index;
+   return $this;
+}
+```
+- Si on utilise la commande `make:form` avec une classe qui ne fait pas partie de l'ORM, il faut taper le nom en entier ( exp : `\App`\Entity\PropertySearchType`) 
+- Pas de besoin de csrf_token pour les résultats de recherche
+- Utilisation de la méthode `Get` pour pouvoir partager les résultats ( via un lien )
+- Pour modifier le préfix affiché dans le lien, il faut redéfinir la méthode `getBlockPrefix` dans `PropertySearchType`
+- Pour ajouter des conditions au niveau du `PropertySearch`, il faut importer la classe `Symfony\Component\Validator\Constraints as Assert`, ensuite utiliser cette contrainte dans la partie *annotations* du champ surlequel on veut ajouter une contrainte exp : 
+```php
+/**
+ * @var int|null
+ * @Assert\Range(min=10,max=500)
+ */
+```
