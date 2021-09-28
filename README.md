@@ -161,3 +161,13 @@ public function setIndex($index)
  * @Assert\Range(min=10,max=500)
  */
 ```
+## 9/16 : Ajouter des options
+- Pour mapper une nouvelle `Entity` avec une autre, il faut définir le `field type` à `relation` en choisissant la classe avec laquelle elle va être mappé ainsi que le type de relation( ManyToOne, ManyToMany..)
+- Symfony manipule les tableaux en tant que `ArrayCollection`, cette classe implémente des methodes tels que `first()` ,`last()`..
+- Pour générer un controller de **CRUD** : `php bin/console make:crud`
+- Pour ajouter un champ `select` dans un formulaire, avec comme options les valeurs en BDD de l'objet, il faut choisir `EntityType::class`
+```php
+->add('options',EntityType::class)
+```
+- Pour revenir en arrière sur une migration, il faut d'abord afficher l'état de la base avec `php bin/console doctrine:migrations:status` ensuite choisir la version sur laquelle on veut se positionner `php bin/console doctrine:migrations:migrate numDeVersion`
+- Dans une relation **ManyToMany**, il faut faire attention à la classe qui possède la relation et la classe mappé par la relation( `inversedBy` et `mappedBy` )
