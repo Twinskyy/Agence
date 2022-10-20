@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Twinskyy_Agence&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Twinskyy_Agence)
+
 # Formation Symfony
 
 Pour lancer l'application, taper la cmd `php -S localhost:8000 -t public`
@@ -161,6 +163,7 @@ public function setIndex($index)
  * @Assert\Range(min=10,max=500)
  */
 ```
+
 ## 9/16 : Ajouter des options
 - Pour mapper une nouvelle `Entity` avec une autre, il faut définir le `field type` à `relation` en choisissant la classe avec laquelle elle va être mappé ainsi que le type de relation( ManyToOne, ManyToMany..)
 - Symfony manipule les tableaux en tant que `ArrayCollection`, cette classe implémente des methodes tels que `first()` ,`last()`..
